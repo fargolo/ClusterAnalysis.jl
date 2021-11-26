@@ -208,7 +208,7 @@ function kmeans(data::AbstractMatrix{T}, K::Int;
 
         new_centroids, new_cluster, new_withinss, new_iter = _kmeans(data, K, maxiter, init)
 
-        if new_withinss < withinss
+        if new_withinss > withinss
             centroids .= new_centroids
             cluster .= new_cluster
             withinss = new_withinss
@@ -268,7 +268,7 @@ function _kmeans(data::AbstractMatrix{T}, K::Int, maxiter::Int, init::Symbol) wh
         norms .= new_norms
 
         # update centroids, cluster and whithinss
-        if new_withinss < withinss
+        if new_withinss > withinss
             centroids .= new_centroids
             cluster .= new_cluster
             withinss = new_withinss
